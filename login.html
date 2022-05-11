@@ -42,6 +42,26 @@
                 top: 6px;
                 border-radius: 4px;
             }
+
+            fieldset div {
+                position: relative;
+                left: 200px;
+                top: 60px;
+            }
+
+            #InputForID, #InputForPassword {
+                padding-left: 20px;
+                margin-bottom: 40px;
+                width: 360px;
+                height: 40px;
+            }
+
+            #ButtonForLogin {
+                position: relative;
+                left: 10px;
+                width: 360px;
+                height: 40px;
+            }
         </style>
         <script>
             if (typeof(Storage) !== "undefined") {
@@ -53,8 +73,8 @@
         <header>
             <nav>
                 <ul>
-                    <li><a href="#Main" class="logo" style="margin-left: 10px;"><img src="src\img\logo.png"></a></li>
-                    <li><a href="#Market" style="margin-left: 70px;">Markets</a></li>
+                    <li><a href="index.html" class="logo" style="margin-left: 10px;"><img src="src\img\logo.png"></a></li>
+                    <li><a href="markets.html" style="margin-left: 70px;">Markets</a></li>
                     <li>
                         <form style="margin-left: 40px;">
                             <input placeholder="search.." type="text" class="search">
@@ -63,5 +83,13 @@
                 </ul>
             </nav>
         </header>
+        <fieldset style="border: none;">
+            <div>
+                <h1>Welcome to Let's Retire!</h1>
+                <input id="InputForID" type="text" placeholder="ID"><br>
+                <input id="InputForPassword" type="password" placeholder="password">
+                <button type="button" id="ButtonForLogin" style="display: block;">Continue</button>
+            </div>
+        </fieldset>
     </body>
 </html>
