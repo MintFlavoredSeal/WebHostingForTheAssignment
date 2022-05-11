@@ -48,6 +48,11 @@
                 width: 70px;
             }
         </style>
+        <script>
+            if (typeof(Storage) !== "undefined") {
+                console.log(localStorage.getItem("name"))
+            }
+        </script>
     </head>
     <body>
         <header>
@@ -60,7 +65,7 @@
                             <input placeholder="search.." type="text" class="search">
                         </form>
                     </li>
-                    <li style="float:right"><a class="login" href="#login">Log In</a></li>
+                    <li style="float:right"><a class="login" href="login.html">Log In</a></li>
                 </ul>
             </nav>
         </header>
