@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Let's Retire</title>
+        <link rel="shortcut icon" type="image/x-icon" href="src\img\shortcut_icon.png">
+        <style>
+            body {
+                background-image: url("src/img/background.jpg");
+                background-repeat: no-repeat;
+                background-color: #fff7ff;
+            }
+
+            header ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #323232
+              }
+              
+            header li {
+                float: left;
+            }
+              
+            header li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+            
+            header li a:hover:not(.logo) {
+                background-color: black
+            }
+
+            .logo img {
+                width: 80px;
+                position: absolute;
+                top: 16px
+            }
+
+            .search {
+                height: 32px;
+                width: 288px;
+                position: relative;
+                top: 6px;
+                border-radius: 4px;
+            }
+
+            .rightward {
+                background-color: darkgoldenrod;
+                width: 70px;
+            }
+
+            #InfoSection {
+                position: relative;
+                left: 140px;
+            }
+
+            #InfoSection h1 {
+                color: white;
+                font-size: 36px;
+                position: relative;
+                left: 40px;
+            }
+
+            #InfoSection div {
+                display: block;
+                width: 1200px;
+                height: 800px;
+                background-color: white;
+                border-radius: 36px;
+                border-style: none;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="logo" style="margin-left: 10px;"><img src="src\img\logo.png"></a></li>
+                    <li><a href="markets.html" style="margin-left: 70px;">Markets</a></li>
+                    <li>
+                        <form style="margin-left: 40px;">
+                            <input placeholder="search.." type="text" class="search">
+                        </form>
+                    </li>
+                    <li style="float:right" class="preLogged"><a class="rightward" href="signup.html">Sign Up</a></li>
+                    <li style="float:right" class="preLogged"><a class="rightward" href="login.html">Log In</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section id="InfoSection">
+            <h1>Markets</h1>
+            <div>
+
+            </div>
+        </section>
+    </body>
+    <script>
+        let user;
+
+        if (JSON.parse(localStorage.getItem("current")) != null) {
+            user = JSON.parse(localStorage.getItem("current"));
+
+            document.getElementsByClassName("rightward")[1].innerHTML = "Log Out";
+            document.getElementsByClassName("rightward")[1].setAttribute("href", "logout.html")
+            document.getElementsByClassName("preLogged")[0].remove();
+        }
+    </script>
+    <script src="info.js" type="module"></script>
+</html>

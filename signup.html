@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Let's Retire</title>
+        <link rel="shortcut icon" type="image/x-icon" href="src\img\shortcut_icon.png">
+        <style>
+            body {
+                background-image: url("src/img/background.jpg");
+                background-repeat: no-repeat;
+                background-color: #fff7ff;
+            }
+
+            header ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+              }
+              
+            header li {
+                float: left;
+            }
+              
+            header li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+            
+            header li a:hover:not(.logo) {
+                background-color: #111;
+            }
+
+            .logo img {
+                width: 80px;
+                position: absolute;
+                top: 16px
+            }
+
+            .search {
+                height: 32px;
+                width: 288px;
+                position: relative;
+                top: 6px;
+                border-radius: 4px;
+            }
+
+            fieldset div {
+                position: relative;
+                left: 200px;
+                top: 60px;
+            }
+
+            #InputForID, #InputForPassword {
+                position: relative;
+                padding-left: 20px;
+                margin-bottom: 40px;
+                width: 360px;
+                height: 40px;
+            }
+
+            #ButtonForLogin {
+                position: relative;
+                left: 10px;
+                bottom: 20px;
+                width: 360px;
+                height: 40px;
+                border-radius: 6px;
+                background-color: aliceblue;
+                border-style: none;
+                font-size: 12px;
+                font-weight: bold;
+                color: black;
+            }
+
+            #ErrorMessageForID, #ErrorMessageForPass {
+                position: relative;
+                visibility: hidden;
+                bottom: 40px;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            #linkForLogin {
+                color: orange;
+                font-weight: bold;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="logo" style="margin-left: 10px;"><img src="src\img\logo.png"></a></li>
+                    <li><a href="markets.html" style="margin-left: 70px;">Markets</a></li>
+                    <li>
+                        <form style="margin-left: 40px;">
+                            <input placeholder="search.." type="text" class="search">
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <fieldset style="border: none;">
+            <div>
+                <h1 style="color: white;">Create Account</h1>
+                <input id="InputForID" type="text" placeholder="ID"><br>
+                <p id="ErrorMessageForID" style="color: red;">blank</p>
+                <input id="InputForPassword" type="password" placeholder="password" style="bottom: 10px;"><br>
+                <p id="ErrorMessageForPass" style="color: red;">blank</p>
+                <button type="button" id="ButtonForLogin" style="display: block;">Continue</button>
+                <p style="color: white;">Do you already have an account? <a id="linkForLogin" href="login.html">log in</a></p>
+            </div>
+        </fieldset>
+        <script>
+            const User = class {
+                constructor (id, pass) {
+                    this.id = id;   // string
+                    this.password = pass;   // string
+                    this.info = null // 매수, 매도 정보
+                }
+            };
+
+            let users = new Array();        // 등록된 계정의 배열
+
+            const btnReg = document.getElementById("ButtonForLogin");
+            const IDReg = document.getElementById("InputForID");
+            const PassReg = document.getElementById("InputForPassword");
+
+            btnReg.onclick = function () {
+                if (JSON.parse(localStorage.getItem("users")) != null) {
+                    users = JSON.parse(localStorage.getItem("users"));
+                }
+
+                let isValidAccount = true;
+
+                for (let i = 0; i < users.length; ++i) {        // 중복검사
+                    if (users[i].id == IDReg.value) {
+                        document.getElementById("ErrorMessageForID").style.visibility = "visible";
+                        document.getElementById("ErrorMessageForID").innerText = "The ID is already occupied!";
+                        document.getElementById("ErrorMessageForPass").style.visibility = "hidden";
+                        isValidAccount = false;
+                        break;
+                    }
+                }
+
+                if (IDReg.value && PassReg.value && isValidAccount) {
+                    users.push(new User(IDReg.value, PassReg.value));
+                    localStorage.setItem("users", JSON.stringify(users));          // localStorage에 users 배열 업데이트
+                    document.getElementById("ErrorMessageForID").style.visibility = "hidden";
+                    document.getElementById("ErrorMessageForPass").style.visibility = "hidden";
+                    alert("The new account is registered!")
+                }
+                
+                if (IDReg.value == "") {
+                    document.getElementById("ErrorMessageForID").style.visibility = "visible";
+                    document.getElementById("ErrorMessageForID").innerText = "Type your ID";
+                }
+
+                if (PassReg.value == "") {
+                    document.getElementById("ErrorMessageForPass").style.visibility = "visible";
+                    document.getElementById("ErrorMessageForPass").innerText = "Type your password";
+                }
+            }
+        </script>
+    </body>
+</html>
