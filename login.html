@@ -5,6 +5,12 @@
         <title>Let's Retire</title>
         <link rel="shortcut icon" type="image/x-icon" href="src\img\shortcut_icon.png">
         <style>
+            body {
+                background-image: url("src/img/background.jpg");
+                background-repeat: no-repeat;
+                background-color: #fff7ff;
+            }
+
             header ul {
                 list-style-type: none;
                 margin: 0;
@@ -49,6 +55,11 @@
                 top: 60px;
             }
 
+            fieldset div p {
+                position: relative;
+                left: 10px
+            }
+
             #InputForID, #InputForPassword {
                 padding-left: 20px;
                 margin-bottom: 40px;
@@ -61,13 +72,19 @@
                 left: 10px;
                 width: 360px;
                 height: 40px;
+                border-radius: 6px;
+                background-color: aliceblue;
+                border-style: none;
+                font-size: 12px;
+                font-weight: bold;
+            }
+
+            #linkforsignup {
+                color: orange;
+                font-weight: bold;
+                text-decoration: none;
             }
         </style>
-        <script>
-            if (typeof(Storage) !== "undefined") {
-                console.log(localStorage.getItem("name"))
-            }
-        </script>
     </head>
     <body>
         <header>
@@ -85,11 +102,40 @@
         </header>
         <fieldset style="border: none;">
             <div>
-                <h1>Welcome to Let's Retire!</h1>
+                <h1 style="color: white;">Welcome to Let's Retire!</h1>
                 <input id="InputForID" type="text" placeholder="ID"><br>
                 <input id="InputForPassword" type="password" placeholder="password">
                 <button type="button" id="ButtonForLogin" style="display: block;">Continue</button>
+                <p style="color: white;">Are you new to Let's Retire? <a id="linkforsignup" href="signup.html">sign up</a></p>
             </div>
         </fieldset>
+        <script>
+            let users = new Array();    // users: Array[User]
+
+            if (JSON.parse(localStorage.getItem("users")) != null) {
+                users = JSON.parse(localStorage.getItem("users"));      // localStorage에서 정보 읽기
+            }
+
+            const btnReg = document.getElementById("ButtonForLogin");
+            const IDReg = document.getElementById("InputForID");
+            const PassReg = document.getElementById("InputForPassword");
+
+            btnReg.onclick = function () {
+                let isValidInput = false;
+
+                for (let i = 0; i < users.length; ++i) {
+                    if (users[i].id == IDReg.value && users[i].password == PassReg.value) {
+                        isValidInput = true;
+                        localStorage.setItem("current", JSON.stringify(users[i]));
+                        location.replace("index.html");
+                        break;
+                    }
+                }
+
+                if (!isValidInput) {
+                    alert("Invalid ID or password");
+                }
+            }
+        </script>
     </body>
 </html>
