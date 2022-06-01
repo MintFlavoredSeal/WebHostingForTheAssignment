@@ -5,12 +5,18 @@
         <title>Let's Retire</title>
         <link rel="shortcut icon" type="image/x-icon" href="src\img\shortcut_icon.png">
         <style>
+            body {
+                background-image: url("src/img/background.jpg");
+                background-repeat: no-repeat;
+                background-color: #fff7ff;
+            }
+
             header ul {
                 list-style-type: none;
                 margin: 0;
                 padding: 0;
                 overflow: hidden;
-                background-color: #333;
+                background-color: #323232
               }
               
             header li {
@@ -26,7 +32,7 @@
             }
             
             header li a:hover:not(.logo) {
-                background-color: #111;
+                background-color: black
             }
 
             .logo img {
@@ -43,21 +49,50 @@
                 border-radius: 4px;
             }
 
-            .login {
+            .rightward {
                 background-color: darkgoldenrod;
                 width: 70px;
             }
-        </style>
-        <script>
-            if (typeof(Storage) !== "undefined") {
-                console.log(localStorage.getItem("name"))
+
+            #backgroundSection {
+                position: relative;
+                top: 120px;
+                left: 180px;
             }
-        </script>
+
+            #backgroundSection h1 {
+                color: white;
+                font-size: 64px;
+            }
+
+            #backgroundSection input {
+                width: 360px;
+                height: 60px;
+                position: relative;
+                bottom: 20px;
+                font-size: 20px;
+                color: #323232;
+                font-weight: bold;
+                background-color: gold;
+                border-radius: 12px;
+                border-color: gold;
+            }
+
+            #infoSection {
+                position: relative;
+                top: 1800px;
+                left: 120px;
+            }
+
+            #infoSection h1 {
+                font-size: 40px;
+            }
+        </style>
     </head>
     <body>
         <header>
             <nav>
-                <ul>
+                <ul id="menubarList">
                     <li><a href="index.html" class="logo" style="margin-left: 10px;"><img src="src\img\logo.png"></a></li>
                     <li><a href="markets.html" style="margin-left: 70px;">Markets</a></li>
                     <li>
@@ -65,9 +100,39 @@
                             <input placeholder="search.." type="text" class="search">
                         </form>
                     </li>
-                    <li style="float:right"><a class="login" href="login.html">Log In</a></li>
+                    <li style="float:right" class="preLogged"><a class="rightward" href="signup.html">Sign Up</a></li>
+                    <li style="float:right" class="preLogged"><a class="rightward" href="login.html">Log In</a></li>
                 </ul>
             </nav>
         </header>
+        <section id="backgroundSection">
+            <h1>Move to the Next Level</h1>
+            <form>
+                <input id="backgroundButton" type="button" value="Be a Millionaire" onclick="location.replace('login.html')">
+            </form>
+        </section>
+        <section id="infoSection">
+            <h1>Catch Your Next Opportunity</h1>
+        </section>
+        <footer>
+            
+        </footer>
     </body>
+    <script>
+        let user;
+
+        if (JSON.parse(localStorage.getItem("current")) != null) {
+            document.getElementById("backgroundButton").onclick = function () {
+                location.replace("markets.html");
+            }
+
+            user = JSON.parse(localStorage.getItem("current"));
+
+            document.getElementsByClassName("rightward")[1].innerHTML = "Log Out";
+            document.getElementsByClassName("rightward")[1].setAttribute("href", "logout.html")
+            document.getElementsByClassName("preLogged")[0].remove();
+        }
+
+        // 메뉴바를 현재 접속된 ID에 맞게 수정
+    </script>
 </html>
